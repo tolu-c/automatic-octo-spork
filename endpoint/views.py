@@ -10,10 +10,10 @@ from rest_framework.response import Response
 @api_view(['GET'])
 def api_overview(request):
     api_urls = {
-        'List': '/info-list/',
-        'Detail': '/info-detail/<str:pk>/',
-        'Create': '/info-create/',
-        'Update': '/info-update/<str:pk>/',
-        'Delete': '/info-delete/<str:pk>/',
+        'List': '/eoi-list/',
+        'Detail': '/eoi-detail/<str:pk>/',
+        'Create': '/eoi-create/',
+        'Update': '/eoi-update/<str:pk>/',
+        'Delete': '/eoi-delete/<str:pk>/',
     }
     return Response(api_urls)
