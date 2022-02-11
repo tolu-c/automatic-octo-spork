@@ -16,7 +16,7 @@ Backend endpoint for selgsalerty challenge
 
 - Clone this repository.
 - Create a virtual environment: `python -m venv <nameofvenv>`
-- Activate virtual environment: `. venv/scripts/activate`
+- Activate virtual environment: `. <nameofvenv>/scripts/activate`
 - Install the required dependencies: `pip install -r requirement.txt`
 - Run the server: `python manage.py runserver`
 - Visit the server at port [8000](http://localhost:8000)
