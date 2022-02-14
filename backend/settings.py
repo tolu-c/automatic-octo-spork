@@ -127,9 +127,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    'https://teaminnovation.netlify.app'
-]
+CORS_ORIGIN_ALLOW_ALL = True
 
 django_heroku.settings(locals())
