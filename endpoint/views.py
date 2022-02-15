@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth.models import User
 from rest_framework.response import Response
+from rest_framework import status
 from .serializers import EoiSerializer, GenderSerializer, SkillSerializer, EducationSerializer, KnowledgeSerializer, UserSerializer
 from .models import Eoi, Gender, Education, Skill, Knowledge
 
@@ -46,7 +47,7 @@ def getUserById(request, pk):
 
 
 @api_view(['GET'])
-@permission_classes([IsAdminUser])
+# @permission_classes([IsAdminUser])
 def eoi_list(request):
     eois = Eoi.objects.all()
     serializer = EoiSerializer(eois, many=True)
@@ -95,7 +96,8 @@ def eoi_create(request):
 
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data)
+        return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
@@ -106,7 +108,8 @@ def eoi_update(request, pk):
 
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data)
+        return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['DELETE'])
