@@ -5,8 +5,11 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import EoiSerializer, GenderSerializer, SkillSerializer, EducationSerializer, KnowledgeSerializer, UserSerializer
+from .serializers import EoiSerializer, GenderSerializer, SkillSerializer, EducationSerializer, KnowledgeSerializer, UserSerializer, UserSerializerWithToken
 from .models import Eoi, Gender, Education, Skill, Knowledge
+
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 # Create your views here.
@@ -26,6 +29,7 @@ def api_overview(request):
         'EducationList': '/education-list',
 
         'Userlist': '/user-list',
+        'UserDetail': '/user/<str:pk>/'
     }
     return Response(api_urls)
 
@@ -47,7 +51,15 @@ def getUserById(request, pk):
 
 
 @api_view(['GET'])
-# @permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
+def getUserProfile(request):
+    user = request.user
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
 def eoi_list(request):
     eois = Eoi.objects.all()
     serializer = EoiSerializer(eois, many=True)
@@ -119,3 +131,18 @@ def eoi_delete(request, pk):
     eoi.delete()
 
     return Response('Eoi Deleted Successfully')
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        serializer = UserSerializerWithToken(self.user).data
+        for k, v in serializer.items():
+            data[k] = v
+
+        return data
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer

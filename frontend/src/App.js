@@ -1,25 +1,24 @@
-import { useState, useEffect, Component } from "react";
-import axios from "axios";
+import "./App.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import PrivateRoute from "./utils/PrivateRoute";
+import { AuthProvider } from "./context/AuthContext";
 
-export default function App() {
-  const [data, setData] = useState([]);
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import Header from "./components/Header";
 
-  useEffect(() => {
-    axios("https://teaminnovation-endpoint.herokuapp.com/eoi-list/")
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => console.error(`Error: ${error}`));
-  }, []);
-
-  console.log(data);
-
+function App() {
   return (
-    <div>
-      hello world
-      {data.map((info) => (
-        <p>{info.email}</p>
-      ))}
+    <div className="App">
+      <Router>
+        <AuthProvider>
+          <Header />
+          <PrivateRoute component={HomePage} path="/" exact />
+          <Route component={LoginPage} path="/login" />
+        </AuthProvider>
+      </Router>
     </div>
   );
 }
+
+export default App;
