@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
                   'first_name', 'last_name', 'isAdmin', 'name']
 
     def get_isAdmin(self, obj):
-        return obj.is_superuser
+        return obj.is_staff
 
     def get_name(self, obj):
         name = obj.first_name + ' ' + obj.last_name

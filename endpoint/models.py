@@ -32,7 +32,7 @@ class Knowledge(models.Model):
 
 
 class Eoi(models.Model):
-
+    fullname = models.CharField(max_length=255, default='Enter your full name')
     email = models.EmailField()
     gender = models.ForeignKey(Gender, on_delete=models.CASCADE, null=False)
     phone = models.CharField(max_length=255, blank=False)
@@ -51,21 +51,3 @@ class Eoi(models.Model):
 
     def __str__(self):
         return self.email
-
-
-'''
-email => emailfield
-fullname => charfield
-gender:. => foreign key
-phone number => charfield
-state of residence => charfield
-level of education: => foreign key
-technical skills => foreign key
-basic knowledge: boolean => foreign key
-description of most challenging => charfield
-worked on any projects => charfield
-breif about your tech career journey => charfield
-github url => url field
-why wanna join the network with => charfield
-tandc => foreign key
-'''

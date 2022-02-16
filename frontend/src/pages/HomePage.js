@@ -16,6 +16,7 @@ function HomePage() {
 
   return (
     <div>
+
       hello world
       {data.map((info) => (
         <p key={info.id}>{info.email}</p>

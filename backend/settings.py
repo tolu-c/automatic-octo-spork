@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'endpoint.apps.EndpointConfig',
     'rest_framework',
     'corsheaders',
-    
+
     'rest_framework_simplejwt.token_blacklist',
 ]
 
@@ -80,7 +80,8 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+
+    ),
 }
 
 SIMPLE_JWT = {

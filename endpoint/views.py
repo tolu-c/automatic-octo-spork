@@ -11,7 +11,6 @@ from .models import Eoi, Gender, Education, Skill, Knowledge
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-
 # Create your views here.
 
 @api_view(['GET'])
@@ -35,7 +34,7 @@ def api_overview(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAdminUser])
+# @permission_classes([IsAdminUser])
 def userList(request):
     users = User.objects.all()
     serializer = UserSerializer(users, many=True)
@@ -43,7 +42,7 @@ def userList(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAdminUser])
+# @permission_classes([IsAdminUser])
 def getUserById(request, pk):
     user = User.objects.get(id=pk)
     serializer = UserSerializer(user, many=False)
@@ -59,7 +58,7 @@ def getUserProfile(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAdminUser])
+# @permission_classes([IsAdminUser])
 def eoi_list(request):
     eois = Eoi.objects.all()
     serializer = EoiSerializer(eois, many=True)
@@ -95,7 +94,7 @@ def knowledge_list(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAdminUser])
+# @permission_classes([IsAdminUser])
 def eoi_detail(request, pk):
     eoi = Eoi.objects.get(id=pk)
     serializer = EoiSerializer(eoi, many=False)
@@ -113,7 +112,7 @@ def eoi_create(request):
 
 
 @api_view(['POST'])
-@permission_classes([IsAdminUser])
+# @permission_classes([IsAdminUser])
 def eoi_update(request, pk):
     eoi = Eoi.objects.get(id=pk)
     serializer = EoiSerializer(instance=eoi, data=request.data)
@@ -125,7 +124,7 @@ def eoi_update(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_classes([IsAdminUser])
+# @permission_classes([IsAdminUser])
 def eoi_delete(request, pk):
     eoi = Eoi.objects.get(id=pk)
     eoi.delete()
