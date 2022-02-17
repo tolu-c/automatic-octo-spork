@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Eoi, Gender, Education, Skill, Knowledge
+from .models import Eoi, Skill, Knowledge
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -43,25 +43,7 @@ class EoiSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class GenderSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Gender
-        fields = '__all__'
-
-
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
-        fields = '__all__'
-
-
-class KnowledgeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Knowledge
-        fields = '__all__'
-
-
-class EducationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Education
         fields = '__all__'

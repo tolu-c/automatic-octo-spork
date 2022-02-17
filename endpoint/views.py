@@ -5,13 +5,14 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import EoiSerializer, GenderSerializer, SkillSerializer, EducationSerializer, KnowledgeSerializer, UserSerializer, UserSerializerWithToken
-from .models import Eoi, Gender, Education, Skill, Knowledge
+from .serializers import EoiSerializer, SkillSerializer, UserSerializer, UserSerializerWithToken
+from .models import Eoi, Skill, Knowledge
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 # Create your views here.
+
 
 @api_view(['GET'])
 def api_overview(request):
@@ -66,30 +67,9 @@ def eoi_list(request):
 
 
 @api_view(['GET'])
-def gender_list(request):
-    genders = Gender.objects.all()
-    serializer = GenderSerializer(genders, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
 def skill_list(request):
     skills = Skill.objects.all()
     serializer = SkillSerializer(skills, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def education_list(request):
-    educations = Education.objects.all()
-    serializer = EducationSerializer(educations, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def knowledge_list(request):
-    knowledges = Knowledge.objects.all()
-    serializer = KnowledgeSerializer(knowledges, many=True)
     return Response(serializer.data)
 
 
