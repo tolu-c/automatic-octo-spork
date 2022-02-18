@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Eoi, Skill, Knowledge
+from .models import Eoi
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -42,8 +42,3 @@ class EoiSerializer(serializers.ModelSerializer):
         model = Eoi
         fields = '__all__'
 
-
-class SkillSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Skill
-        fields = '__all__'

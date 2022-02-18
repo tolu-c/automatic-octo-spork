@@ -1,12 +1,11 @@
 from django.shortcuts import render
-from rest_framework import serializers
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import EoiSerializer, SkillSerializer, UserSerializer, UserSerializerWithToken
-from .models import Eoi, Skill, Knowledge
+from .serializers import EoiSerializer, UserSerializer, UserSerializerWithToken
+from .models import Eoi
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -22,11 +21,6 @@ def api_overview(request):
         'Create': '/eoi-create/',
         'Update': '/eoi-update/<str:pk>/',
         'Delete': '/eoi-delete/<str:pk>/',
-
-        'GenderList': '/gender-list',
-        'SkillList': '/skill-list',
-        'KnowledgeList': '/knowledge-list',
-        'EducationList': '/education-list',
 
         'Userlist': '/user-list',
         'UserDetail': '/user/<str:pk>/'
@@ -65,12 +59,6 @@ def eoi_list(request):
     serializer = EoiSerializer(eois, many=True)
     return Response(serializer.data)
 
-
-@api_view(['GET'])
-def skill_list(request):
-    skills = Skill.objects.all()
-    serializer = SkillSerializer(skills, many=True)
-    return Response(serializer.data)
 
 
 @api_view(['GET'])
